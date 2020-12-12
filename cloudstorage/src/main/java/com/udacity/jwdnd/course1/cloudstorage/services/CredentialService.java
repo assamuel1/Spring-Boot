@@ -3,7 +3,6 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialMapper;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UsersMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
-import com.udacity.jwdnd.course1.cloudstorage.model.forms.CredentialModalForm;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -24,16 +23,18 @@ public class CredentialService {
 
     }
 
-    public void createCredential(CredentialModalForm credentialModalForm, String username) {
+    public void createCredential(Credentials newCredential, String username) {
         //Encrypt password
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
-        String encryptedPassword = encryptionService.encryptValue(credentialModalForm.getPassword(),encodedKey);
+        String encryptedPassword = encryptionService.encryptValue(newCredential.getPassword(),encodedKey);
 
-        Credentials newCredential = new Credentials(null, credentialModalForm.getUrl(),credentialModalForm.getUsername(), encryptedPassword, encodedKey, userMapper.getUserIdByUsername(username));
-
+        newCredential.setPassword(encryptedPassword);
+        newCredential.setKey(encodedKey);
+        //Credentials newCredential = new Credentials(null, credential.getUrl(),credential.getUsername(), encryptedPassword, encodedKey, userMapper.getUserIdByUsername(username));
+        newCredential.setUserid(userMapper.getUserIdByUsername(username));
         this.credentialMapper.createCredential(newCredential);
     }
 
@@ -44,19 +45,28 @@ public class CredentialService {
 
     public List<Credentials> getAllCredentials(Integer userid)
     {
-        return credentialMapper.getAllCredentials(userid);
+        List<Credentials> credentialsList = credentialMapper.getAllCredentials(userid);
+        for (Credentials credential: credentialsList) {
+            credential.setDecryptedPassword(encryptionService.decryptValue(credential.getPassword(),credential.getKey()));
+        }
+        return credentialsList;
+
+        //return credentialMapper.getAllCredentials(userid);
     }
 
-    public void updateCredential(CredentialModalForm credentialModalForm, String username) {
+    public void updateCredential(Credentials editCredential, String username) {
         //Encrypt password
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
-        String encryptedPassword = encryptionService.encryptValue(credentialModalForm.getPassword(),encodedKey);
+        String encryptedPassword = encryptionService.encryptValue(editCredential.getPassword(),encodedKey);
 
-        Credentials editNote = new Credentials(Integer.parseInt(credentialModalForm.getCredentialid()), credentialModalForm.getUrl(),credentialModalForm.getUsername(), encryptedPassword, encodedKey , userMapper.getUserIdByUsername(username));
-        credentialMapper.updateCredentials(editNote);
+        editCredential.setPassword(encryptedPassword);
+        editCredential.setKey(encodedKey);
+
+        // Credentials editCredentials= new Credentials(credentials.getCredentialid(), credentials.getUrl(),credentials.getUsername(), encryptedPassword, encodedKey , userMapper.getUserIdByUsername(username));
+        credentialMapper.updateCredentials(editCredential);
     }
 
     public void deleteCredential(int credentialid) {
