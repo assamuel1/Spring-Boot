@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.forms.NoteModalForm;
+import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UsersService;
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-//@RequestMapping("/note")
 public class NoteController {
 
     private Logger logger = LoggerFactory.getLogger(NoteController.class);
@@ -24,27 +23,26 @@ public class NoteController {
         this.userService = userService;
     }
 
-    @PostMapping("/result")
-        public String addNewNotes(NoteModalForm noteModalForm, Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
+    @PostMapping("/addNote")
+        public String addNewNotes(@ModelAttribute("noteObject") Notes note, Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
         String username = authentication.getName();
-        String id = noteModalForm.getNoteId();
-        if ((noteModalForm.getNoteId()) == "") {
+        Integer id = note.getnoteId();
+        if ((note.getnoteId()) == null) {
             try {
-                this.noteService.createNote(noteModalForm, username);
-                redirectAttributes.addFlashAttribute("successMessage", "Your note was successfully created.");
-                noteModalForm.setNoteTitle("");
-                noteModalForm.setNoteDescription("");
+                this.noteService.createNote(note, username);
+               redirectAttributes.addFlashAttribute("successMessage", "Your note was successfully created.");
+                note.setNotetitle("");
+                note.setNotedescription("");
                 return "redirect:/result";
             } catch (Exception e) {
                 logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-                redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with the note creation... Please try again.");
+              redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with the note creation... Please try again.");
                 return "redirect:/result";
             }
-
         }
         else{
             try {
-                noteService.updateNote(noteModalForm, username);
+                noteService.updateNote(note, username);
                 redirectAttributes.addFlashAttribute("successMessage", "Your note was successfully edited");
                 return "redirect:/result";
             } catch (Exception e) {
@@ -56,11 +54,10 @@ public class NoteController {
         }
     }
 
-
-        @GetMapping("/delete/{noteid}")
-    public String deleteNote(@PathVariable int noteid, RedirectAttributes attributes) {
+    @GetMapping("/deleteNote/{noteId}")
+    public String deleteNote(@PathVariable ("noteId") Integer noteId, RedirectAttributes attributes) {
        try{
-        noteService.deleteNote(noteid);
+        noteService.deleteNote(noteId);
         attributes.addFlashAttribute("successMessage", "Your note was successfully deleted");
         return "redirect:/result";
     } catch (Exception e) {

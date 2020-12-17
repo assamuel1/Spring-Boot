@@ -28,11 +28,9 @@ public class FileController {
     }
 
     @PostMapping("/uploadFile")
+    //Code snippet is based on information provided here https://spring.io/guides/gs/uploading-files/
     public String uploadFile(@RequestParam("file") MultipartFile filetoUpload, Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
         String username = authentication.getName();
-        // String id = file.getFileId();
-        //f (file.getFileId() == Null ) {
-        //Create the file
 
        try {
             this.fileService.createFile(filetoUpload, username);

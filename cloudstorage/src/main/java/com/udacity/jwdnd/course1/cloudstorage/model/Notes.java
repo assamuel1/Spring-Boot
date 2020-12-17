@@ -1,35 +1,26 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
+//Notes Pojo class
 public class Notes {
     private Integer userid;
-    private Integer noteid;
+    public Integer noteId;
     private String notetitle;
     private String notedescription;
 
-    public Notes(Integer noteid, String notetitle, String notedescription, Integer userid) {
-        this.noteid = noteid;
+    public Notes(Integer noteId, String notetitle, String notedescription, Integer userid) {
+        this.noteId = noteId;
         this.notetitle = notetitle;
         this.notedescription = notedescription;
         this.userid = userid;
     }
 
-    @Override
-    public String toString() {
-        return "Notes{" +
-                "userId='" + userid + '\'' +
-                ", noteid=" + noteid +
-                ", notetitle='" + notetitle + '\'' +
-                ", notedescription='" + notedescription + '\'' +
-                '}';
-    }
-
-    public Integer getNoteid()
+    public Integer getnoteId()
     {
-        return noteid;
+        return noteId;
     }
 
-    public void setNoteid(Integer noteid) {
-        this.noteid = noteid;
+    public void setnoteId(Integer noteId) {
+        this.noteId = noteId;
     }
 
     public String getNotetitle() {

@@ -1,6 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
-import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.NoSuchElementException;
@@ -61,7 +60,6 @@ class CloudStorageApplicationTests {
     public void testNewSignedUpUserCanLogin() throws InterruptedException {
 
         // CREATING USER
-        // User data to be used:
         String firstName = "Second";
         String lastName = "Test";
         String username = "test2";
@@ -103,7 +101,7 @@ class CloudStorageApplicationTests {
 	 * Test that logs in an existing user, creates a note and verifies
 	 * that the note details are visible in the note list.
 	 */
-	//@Order(3)
+	@Order(3)
 	@Test
 	public void testCreateNoteWithExistingUser() throws InterruptedException {
 
@@ -249,7 +247,7 @@ class CloudStorageApplicationTests {
         homePage.clickNotesTabButton();
         homePage.clickNotesEditButton();
         //homePage.waitNoteModelPage();
-        Assertions.assertFalse(homePage.verifyNotesExists(editedNoteTitle, editedNoteDescription));
+        Assertions.assertTrue(homePage.verifyNotesExists(editedNoteTitle, editedNoteDescription));
 
         //Logout of the application
         homePage.clickLogoutButton();
@@ -394,7 +392,7 @@ class CloudStorageApplicationTests {
 
     }
 
-
+    @Order(7)
     @Test
     public void testUpdateCredentialWithExistingUser() throws InterruptedException {
 
@@ -474,7 +472,7 @@ class CloudStorageApplicationTests {
 
 
     }
-
+    @Order(8)
     @Test
     public void testDeleteCredentialWithExistingUser() throws InterruptedException {
         // CREATING USER

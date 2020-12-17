@@ -3,7 +3,6 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.model.Files;
 import com.udacity.jwdnd.course1.cloudstorage.model.Notes;
-import com.udacity.jwdnd.course1.cloudstorage.model.forms.NoteModalForm;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,7 +37,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String homePageView(@ModelAttribute("noteModalForm") NoteModalForm noteModalForm , @ModelAttribute("credential") Credentials credential,  @ModelAttribute("Files") Files file, Model model, Authentication authentication) {
+    public String homePageView(@ModelAttribute("noteObject") Notes note , @ModelAttribute("credential") Credentials credential,  @ModelAttribute("Files") Files file, Model model, Authentication authentication) {
         //getusername to get the userid
         String username=authentication.getName();
         int userid = userService.getUser(username).getUserId();

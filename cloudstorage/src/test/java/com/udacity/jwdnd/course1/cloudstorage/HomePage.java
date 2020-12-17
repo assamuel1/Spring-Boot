@@ -75,10 +75,10 @@ public class HomePage {
     @FindBy(id = "credentialModalLabel")
     private WebElement credentialModalLabel;
 
-    @FindBy(id="credentialSaveChanges-Button")
+    @FindBy(id = "credentialSaveChanges-Button")
     private WebElement credentialSaveChanges;
 
-    @FindBy(id ="Logout-Button")
+    @FindBy(id = "Logout-Button")
     private WebElement logoutButton;
 
     public HomePage(WebDriver driver) {
@@ -96,7 +96,7 @@ public class HomePage {
     public void clickNotesTabButton() {
         wait.until(ExpectedConditions.elementToBeClickable(navnotestab));
         //navnotestab.click();
-        je.executeScript("arguments[0].click();",  navnotestab);
+        je.executeScript("arguments[0].click();", navnotestab);
     }
 
     public void createNote(String noteTitleValue, String noteDescriptionValue) throws InterruptedException {
@@ -106,12 +106,12 @@ public class HomePage {
         noteDescriptionInputField.sendKeys(noteDescriptionValue);
         Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(noteSubmitButton));
-        je.executeScript("arguments[0].click();",  noteSubmitButton);
+        je.executeScript("arguments[0].click();", noteSubmitButton);
 
 
     }
 
-    public void updateNote( String noteTitleValue, String noteDescriptionValue) throws InterruptedException {
+    public void updateNote(String noteTitleValue, String noteDescriptionValue) throws InterruptedException {
 
         wait.until(ExpectedConditions.elementToBeClickable(noteModalLabel));
         noteTitleInputField.clear();
@@ -120,15 +120,14 @@ public class HomePage {
         noteDescriptionInputField.sendKeys(noteDescriptionValue);
         Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(noteSubmitButton));
-        je.executeScript("arguments[0].click();",  noteSubmitButton);
-
+        je.executeScript("arguments[0].click();", noteSubmitButton);
 
 
     }
 
     public void clickNotesEditButton() {
         wait.until(ExpectedConditions.elementToBeClickable(noteEditButton));
-        je.executeScript("arguments[0].click();",  noteEditButton);
+        je.executeScript("arguments[0].click();", noteEditButton);
     }
 
     public boolean verifyNotesExists(String noteTitle, String noteDescription) {
@@ -138,6 +137,7 @@ public class HomePage {
         Boolean noteExists = false;
         for (int i = 0; i < noteList.size(); i++) {
             WebElement row = noteList.get(i);
+            //if row is not displayed then use javascript to scroll the row to view
             if (!row.isDisplayed()) {
                 js.executeScript("arguments[0].scrollIntoView(true);", row);
             }
@@ -145,23 +145,24 @@ public class HomePage {
                 noteExists = true;
                 break;
             }
+
         }
         return noteExists;
 
     }
 
     public void clickLogoutButton() {
-        je.executeScript("arguments[0].click();",  logoutButton);
+        je.executeScript("arguments[0].click();", logoutButton);
     }
 
     public void clickDeleteNotesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(noteDeleteButton));
-        je.executeScript("arguments[0].click();",  noteDeleteButton);
+        je.executeScript("arguments[0].click();", noteDeleteButton);
     }
 
     public void clickCredentialsTabButton() {
         wait.until(ExpectedConditions.elementToBeClickable(navcredentialstab));
-        je.executeScript("arguments[0].click();",  navcredentialstab);
+        je.executeScript("arguments[0].click();", navcredentialstab);
     }
 
     public void createCredentials(String url, String username, String password) throws InterruptedException {
@@ -172,7 +173,7 @@ public class HomePage {
         credentialPasswordInputField.sendKeys(password);
         Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(credentialSaveChanges));
-        je.executeScript("arguments[0].click();",  credentialSaveChanges);
+        je.executeScript("arguments[0].click();", credentialSaveChanges);
     }
 
     public void updateCredentials(String url, String username, String password) throws InterruptedException {
@@ -185,7 +186,7 @@ public class HomePage {
         credentialPasswordInputField.sendKeys(password);
         Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(credentialSaveChanges));
-        je.executeScript("arguments[0].click();",  credentialSaveChanges);
+        je.executeScript("arguments[0].click();", credentialSaveChanges);
     }
 
     public boolean verifyCredentialExists(String URL, String credentialUsername, String credentialPassword) {
@@ -193,6 +194,7 @@ public class HomePage {
         WebElement credentialsTable = driver.findElement(By.id("credentialTable"));
         List<WebElement> credentialsList = credentialsTable.findElements(By.tagName("th"));
         Boolean CredentialExists = false;
+        //if row is not displayed then use javascript to scroll the row to view
         for (int i = 0; i < credentialsList.size(); i++) {
             WebElement row = credentialsList.get(i);
             if (!row.isDisplayed()) {
@@ -209,46 +211,13 @@ public class HomePage {
 
     public void clickCredentialsEditButton() {
         wait.until(ExpectedConditions.elementToBeClickable(credentialEditButton));
-        je.executeScript("arguments[0].click();",  credentialEditButton);
+        je.executeScript("arguments[0].click();", credentialEditButton);
     }
 
     public void clickDeleteCredentialsButton() {
         wait.until(ExpectedConditions.elementToBeClickable(credentialDeleteButton));
-        je.executeScript("arguments[0].click();",  credentialDeleteButton);
+        je.executeScript("arguments[0].click();", credentialDeleteButton);
     }
 
-
-   /* public Notes findNote() {
-        WebElement notesTable = driver.findElement(By.id("userTable"));
-        List<WebElement> noteList = notesTable.findElements(By.tagName("td"));
-        boolean noteEdited = false;
-        for (int i=0; i<noteList.size(); i++){
-            WebElement row = noteList.get(i);
-            if (!row.isDisplayed()){
-                je.executeScript("arguments[0].scrollIntoView(true);", row);
-            }
-            WebElement editButton = null;
-            try {
-                editButton = row.findElement(By.name("editNote"));
-            } catch (NoSuchElementException e){
-                // Do nothing go to next
-                continue;
-            }
-
-        }
-    }*/
 }
-    /*public WebElement notesTable = driver.findElement(By.id("userTable"));
-    List<WebElement> noteList = notesTable.findElements(By.tagName("th"));
-    boolean noteCreated = false;
-		for (int i=0; i<noteList.size(); i++){
-        WebElement row = noteList.get(i);
-        if (!row.isDisplayed()){
-        jse.executeScript("arguments[0].scrollIntoView(true);", row);
-        }
-        if (row.getAttribute("innerHTML").equals(noteTitle)){
-        noteCreated = true;
-        break;
-        }
-        }
-        Assertions.assertTrue(noteCreated);*/
+

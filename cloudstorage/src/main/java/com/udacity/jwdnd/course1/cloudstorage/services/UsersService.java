@@ -23,6 +23,7 @@ public class UsersService {
             return userMapper.getUser(username) == null;
         }
 
+        //The code snippet below is based on the snippet provided in the Project directions
         public int createUser(Users user) {
             SecureRandom random = new SecureRandom();
             byte[] salt = new byte[16];

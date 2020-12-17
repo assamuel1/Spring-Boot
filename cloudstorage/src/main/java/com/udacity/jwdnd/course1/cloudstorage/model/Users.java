@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
+//Users POJO class
 public class Users {
     private Integer userId;
     private String username;

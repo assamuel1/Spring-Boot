@@ -1,7 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
+//Files Pojo class
 public class Files {
-   private Integer fileId ;
+
+    private Integer fileId ;
    private String filename;
     private String contenttype;
     private Long filesize;

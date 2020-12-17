@@ -33,7 +33,6 @@ public class CredentialService {
 
         newCredential.setPassword(encryptedPassword);
         newCredential.setKey(encodedKey);
-        //Credentials newCredential = new Credentials(null, credential.getUrl(),credential.getUsername(), encryptedPassword, encodedKey, userMapper.getUserIdByUsername(username));
         newCredential.setUserid(userMapper.getUserIdByUsername(username));
         this.credentialMapper.createCredential(newCredential);
     }
@@ -51,7 +50,6 @@ public class CredentialService {
         }
         return credentialsList;
 
-        //return credentialMapper.getAllCredentials(userid);
     }
 
     public void updateCredential(Credentials editCredential, String username) {
@@ -65,11 +63,11 @@ public class CredentialService {
         editCredential.setPassword(encryptedPassword);
         editCredential.setKey(encodedKey);
 
-        // Credentials editCredentials= new Credentials(credentials.getCredentialid(), credentials.getUrl(),credentials.getUsername(), encryptedPassword, encodedKey , userMapper.getUserIdByUsername(username));
         credentialMapper.updateCredentials(editCredential);
     }
 
-    public void deleteCredential(int credentialid) {
+    public void deleteCredential(int credentialid)
+    {
         credentialMapper.deleteCredentials(credentialid);
     }
 

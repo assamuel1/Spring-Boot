@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
+//This class was provided by the tech lead in the base project file
 public class AuthenticationService implements AuthenticationProvider {
         private UsersMapper userMapper;
         private HashService hashService;
