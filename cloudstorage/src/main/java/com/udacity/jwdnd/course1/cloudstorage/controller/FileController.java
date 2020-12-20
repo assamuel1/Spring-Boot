@@ -38,7 +38,7 @@ public class FileController {
             return "redirect:/result";
         } catch (Exception e) {
             logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-            redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with the file creation... Please try again.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while adding your file. Please try again");
 
         }
         return "redirect:/result";
@@ -52,7 +52,7 @@ public class FileController {
             return "redirect:/result";
         } catch (Exception e) {
             logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-            attributes.addFlashAttribute("errorMessage", "Something went wrong with the file deletion... Please try again.");
+            attributes.addFlashAttribute("errorMessage", "Error encountered while creating adding your file. Please try again");
             return "redirect:/result";
         }
     }

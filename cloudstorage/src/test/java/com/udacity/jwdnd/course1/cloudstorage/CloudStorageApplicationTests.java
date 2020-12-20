@@ -158,12 +158,15 @@ class CloudStorageApplicationTests {
 		homePage.clickNotesEditButton();
 		Assertions.assertTrue(homePage.verifyNotesExists(noteTitle, noteDescription));
 
-
         //Logout of the application
         homePage.clickLogoutButton();
         Thread.sleep(5000);
 	}
 
+	/*
+     * Test that logs in an existing user, creates a note and verifies
+     * that the note details are visible in the note list.
+     */
     @Order(4)
 	@Test
     public void testUpdateNoteWithExistingUser() throws InterruptedException {
@@ -254,7 +257,10 @@ class CloudStorageApplicationTests {
         Thread.sleep(5000);
     }
 
-
+    /**
+     * Test that logs in an existing user, creates a note and verifies
+     * that the note details are visible in the note list.
+     */
     @Order(5)
     @Test
     public void testDeleteNoteWithExistingUser() throws InterruptedException {
@@ -334,10 +340,14 @@ class CloudStorageApplicationTests {
         Thread.sleep(5000);
         Assertions.assertFalse(homePage.verifyNotesExists(noteTitleToBeDeleted, noteDescriptionToBeDeleted));
 
+
         //Logout of the application
         homePage.clickLogoutButton();
 
     }
+
+    /*Write a test that creates a set of credentials, verifies that they are displayed,
+    and verifies that the displayed password is encrypted. */
 
     @Order(6)
     @Test
@@ -385,12 +395,18 @@ class CloudStorageApplicationTests {
 
         wait.until(ExpectedConditions.titleContains("Home Page"));
         homePage.clickCredentialsTabButton();
+
+        homePage.clickCredentialsEditButton();
+        Thread.sleep(5000);
         Assertions.assertTrue(homePage.verifyCredentialExists(credentialURL, credentialusername, credentialpassword));
 
         //Logout of the application
         homePage.clickLogoutButton();
 
     }
+
+    /* Write a test that views an existing set of credentials,
+    verifies that the viewable password is unencrypted, edits the credentials, and verifies that the changes are displayed.*/
 
     @Order(7)
     @Test
@@ -437,6 +453,8 @@ class CloudStorageApplicationTests {
 
         wait.until(ExpectedConditions.titleContains("Home Page"));
         homePage.clickCredentialsTabButton();
+
+        homePage.clickCredentialsEditButton();
         Assertions.assertTrue(homePage.verifyCredentialExists(credentialURL, credentialusername, credentialpassword));
 
         //Logout of the application
@@ -461,17 +479,18 @@ class CloudStorageApplicationTests {
         Assertions.assertEquals("Result Page", driver.getTitle());
         resultPage.returnToHomePage(); // Redirects to home page
 
-        // VERIFY EDITED NOTE
-        homePage.clickNotesTabButton();
-        //homePage.clickNotesEditButton();
+        // VERIFY EDITED CREDENTIAL
+        homePage.clickCredentialsTabButton();
+        homePage.clickCredentialsEditButton();
         Assertions.assertTrue(homePage.verifyCredentialExists(editedURL, editedCredentialUsername, editedCredentialPassword));
 
         //Logout of the application
         homePage.clickLogoutButton();
-        Thread.sleep(5000);
 
 
     }
+
+    /* Write a test that deletes an existing set of credentials and verifies that the credentials are no longer displayed. */
     @Order(8)
     @Test
     public void testDeleteCredentialWithExistingUser() throws InterruptedException {
@@ -550,6 +569,7 @@ class CloudStorageApplicationTests {
         homePage.clickCredentialsTabButton();
 
         Thread.sleep(5000);
+        //Verify Credentials don't exist and are deleted
         Assertions.assertFalse(homePage.verifyCredentialExists(URLToBeDeleted, CredentialUsernameToBeDeleted, CredentialPasswordToBeDeleted));
 
         //Logout of the application

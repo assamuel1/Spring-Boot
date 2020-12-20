@@ -131,25 +131,24 @@ public class HomePage {
     }
 
     public boolean verifyNotesExists(String noteTitle, String noteDescription) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement notesTable = driver.findElement(By.id("userTable"));
-        List<WebElement> noteList = notesTable.findElements(By.tagName("th"));
-        Boolean noteExists = false;
-        for (int i = 0; i < noteList.size(); i++) {
-            WebElement row = noteList.get(i);
-            //if row is not displayed then use javascript to scroll the row to view
-            if (!row.isDisplayed()) {
-                js.executeScript("arguments[0].scrollIntoView(true);", row);
-            }
-            if (row.getAttribute("innerHTML").equals(noteTitle)) {
-                noteExists = true;
-                break;
-            }
 
+        Boolean noteExists = false;
+        try{
+
+            WebElement notesRow = driver.findElement(By.id("noteTitleRow"));
+            WebElement notesDescriptionRow = driver.findElement(By.id("noteDescriptionRow"));
+
+            if (notesRow.getText().equals(noteTitle) && notesDescriptionRow.getText().equals(noteDescription)) {
+                noteExists = true;
+            }
+        } catch (NoSuchElementException e) {
+            return noteExists;
         }
         return noteExists;
 
     }
+
+
 
     public void clickLogoutButton() {
         je.executeScript("arguments[0].click();", logoutButton);
@@ -190,21 +189,19 @@ public class HomePage {
     }
 
     public boolean verifyCredentialExists(String URL, String credentialUsername, String credentialPassword) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement credentialsTable = driver.findElement(By.id("credentialTable"));
-        List<WebElement> credentialsList = credentialsTable.findElements(By.tagName("th"));
         Boolean CredentialExists = false;
-        //if row is not displayed then use javascript to scroll the row to view
-        for (int i = 0; i < credentialsList.size(); i++) {
-            WebElement row = credentialsList.get(i);
-            if (!row.isDisplayed()) {
-                js.executeScript("arguments[0].scrollIntoView(true);", row);
-            }
-            if (row.getAttribute("innerHTML").equals(URL)) {
-                CredentialExists = true;
-                break;
-            }
-        }
+
+      try {
+          WebElement url = driver.findElement(By.id("credential-url"));
+          WebElement username = driver.findElement(By.id("credential-username"));
+          WebElement password = driver.findElement(By.id("credential-password"));
+
+          if (url.getAttribute("value").equals(URL) && username.getAttribute("value").equals(credentialUsername) && password.getAttribute("value").equals(credentialPassword)) {
+              CredentialExists = true;
+          }
+      }catch  (NoSuchElementException e) {
+            return CredentialExists;
+      }
         return CredentialExists;
 
     }

@@ -39,7 +39,7 @@ public class CredentialController {
                 return "redirect:/result";
             } catch (Exception e) {
                 logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-                redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with the credential creation... Please try again.");
+                redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your credential. Please try again");
                 return "redirect:/result";
             }
         }else
@@ -49,7 +49,7 @@ public class CredentialController {
                 return "redirect:/result";
             } catch (Exception e) {
                 logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-                redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with editing the credential... Please try again.");
+                redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your credential. Please try again");
                 return "redirect:/result";
             }
     }
@@ -61,7 +61,7 @@ public class CredentialController {
             return "redirect:/result";
         } catch (Exception e) {
             logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-            attributes.addFlashAttribute("errorMessage", "Something went wrong with the credential deletion... Please try again.");
+            attributes.addFlashAttribute("errorMessage", "Error encountered while creating your credential. Please try again");
             return "redirect:/result";
         }
     }

@@ -36,7 +36,7 @@ public class NoteController {
                 return "redirect:/result";
             } catch (Exception e) {
                 logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-              redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with the note creation... Please try again.");
+              redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your note. Please try again.");
                 return "redirect:/result";
             }
         }
@@ -47,7 +47,7 @@ public class NoteController {
                 return "redirect:/result";
             } catch (Exception e) {
                 logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-                redirectAttributes.addFlashAttribute("errorMessage", "Something went wrong with editing the note... Please try again.");
+                redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your note. Please try again.");
                 return "redirect:/result";
             }
 
@@ -62,7 +62,7 @@ public class NoteController {
         return "redirect:/result";
     } catch (Exception e) {
            logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
-           attributes.addFlashAttribute("errorMessage", "Something went wrong with the note deletion... Please try again.");
+           attributes.addFlashAttribute("errorMessage", "Error encountered while creating your note. Please try again");
            return "redirect:/result";
     }
     }
