@@ -72,7 +72,6 @@ class CloudStorageApplicationTests {
         // Initializing Selenium Page Object and signing up the new user.
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.signup(firstName, lastName, username, password);
-        signUpPage.backToLoginPage();
         Thread.sleep(5000);
 
         // Verify we were successfully redirected to Login page.
@@ -119,7 +118,6 @@ class CloudStorageApplicationTests {
 		// Initializing Selenium Page Object and signing up the new user.
 		SignUpPage signUpPage = new SignUpPage(driver);
 		signUpPage.signup(firstName, lastName, username, password);
-		signUpPage.backToLoginPage();
 		Thread.sleep(5000);
 
 		// Verify we were successfully redirected to Login page.
@@ -185,7 +183,7 @@ class CloudStorageApplicationTests {
 		// Initializing Selenium Page Object and signing up the new user.
 		SignUpPage signUpPage = new SignUpPage(driver);
 		signUpPage.signup(firstName, lastName, username, password);
-		signUpPage.backToLoginPage();
+
 		Thread.sleep(5000);
 
 		// Verify we were successfully redirected to Login page.
@@ -278,7 +276,6 @@ class CloudStorageApplicationTests {
         // Initializing Selenium Page Object and signing up the new user.
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.signup(firstName, lastName, username, password);
-        signUpPage.backToLoginPage();
         Thread.sleep(5000);
 
         // Verify we were successfully redirected to Login page.
@@ -366,7 +363,6 @@ class CloudStorageApplicationTests {
         // Initializing Selenium Page Object and signing up the new user.
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.signup(firstName, lastName, username, password);
-        signUpPage.backToLoginPage();
         Thread.sleep(5000);
 
         // Verify we were successfully redirected to Login page.
@@ -424,7 +420,6 @@ class CloudStorageApplicationTests {
         // Initializing Selenium Page Object and signing up the new user.
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.signup(firstName, lastName, username, password);
-        signUpPage.backToLoginPage();
         Thread.sleep(5000);
 
         // Verify we were successfully redirected to Login page.
@@ -508,7 +503,6 @@ class CloudStorageApplicationTests {
         // Initializing Selenium Page Object and signing up the new user.
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.signup(firstName, lastName, username, password);
-        signUpPage.backToLoginPage();
         Thread.sleep(5000);
 
         // Verify we were successfully redirected to Login page.

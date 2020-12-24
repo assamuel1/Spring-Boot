@@ -33,9 +33,14 @@ public class FileController {
         String username = authentication.getName();
 
        try {
-            this.fileService.createFile(filetoUpload, username);
-            redirectAttributes.addFlashAttribute("successMessage", "Your file was successfully created.");
-            return "redirect:/result";
+            if (filetoUpload.getSize()!= 0 && !fileService.fileExists(filetoUpload) ) {
+                this.fileService.createFile(filetoUpload, username);
+                redirectAttributes.addFlashAttribute("successMessage", "Your file was successfully created.");
+                return "redirect:/result";
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your note. Please try again.");
+                return "redirect:/result";
+            }
         } catch (Exception e) {
             logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while adding your file. Please try again");

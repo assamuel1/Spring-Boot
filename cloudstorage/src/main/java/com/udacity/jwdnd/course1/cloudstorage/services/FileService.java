@@ -31,6 +31,12 @@ public class FileService {
         return fileMapper.getAllFiles(userid);
     }
 
+    public boolean fileExists(MultipartFile filetoUpload){
+        if (this.fileMapper.getFilebyFileName(filetoUpload.getOriginalFilename()) == null)
+            return false;
+        else
+            return true;
+    }
     public void createFile(MultipartFile filetoUpload, String username) throws IOException {
         System.out.println(filetoUpload.getContentType());
         System.out.println(filetoUpload.getSize());
@@ -40,6 +46,7 @@ public class FileService {
         try{
             Files newFile = new Files(null,filetoUpload.getOriginalFilename(),filetoUpload.getContentType(), filetoUpload.getSize(), userMapper.getUserIdByUsername(username), filetoUpload.getBytes());
             this.fileMapper.insertFile(newFile);
+
         }catch(Exception e){
             logger.error("Cause: " + e.getCause() + ". Message: " + e.getMessage());
         }
