@@ -30,12 +30,14 @@ public class SignupController {
     @PostMapping()
     public String signupUser(@ModelAttribute Users user, Model model, RedirectAttributes redirectAttributes) {
         String signupError = null;
+        Boolean duplicateUserError = false;
 
         if (!userService.isUsernameAvailable(user.getUsername())) {
             signupError = "The username already exists.";
+            duplicateUserError = true;
         }
 
-        if (signupError == null) {
+        if (signupError == null && !duplicateUserError) {
             int rowsAdded = userService.createUser(user);
             if (rowsAdded < 0) {
                 signupError = "There was an error signing you up. Please try again.";
@@ -43,10 +45,15 @@ public class SignupController {
         }
 
         if (signupError == null) {
-            model.addAttribute("signupSuccess", "You successfully signed up.");
-            redirectAttributes.addFlashAttribute("successMessage", "You successfully signed up.");
+            model.addAttribute("signupSuccess", true);
+            redirectAttributes.addAttribute("signupSuccess",true);
             return "redirect:/login";
-        } else {
+        } else if( duplicateUserError){
+            model.addAttribute(String.valueOf(duplicateUserError), signupError);
+            return "signup";
+        }
+
+        else {
             model.addAttribute("signupError", signupError);
             return "signup";
         }

@@ -32,13 +32,15 @@ public class FileController {
     public String uploadFile(@RequestParam("file") MultipartFile filetoUpload, Authentication authentication, Model model, RedirectAttributes redirectAttributes) {
         String username = authentication.getName();
 
+        System.out.println(filetoUpload.getSize());
+
        try {
-            if (filetoUpload.getSize()!= 0 && !fileService.fileExists(filetoUpload) ) {
+            if (filetoUpload.getSize()!= 0 && !fileService.fileExists(filetoUpload) && filetoUpload.getSize() <=  20971520 ) {
                 this.fileService.createFile(filetoUpload, username);
                 redirectAttributes.addFlashAttribute("successMessage", "Your file was successfully created.");
                 return "redirect:/result";
             } else {
-                redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your note. Please try again.");
+                redirectAttributes.addFlashAttribute("errorMessage", "Error encountered while creating your file. Please try again.");
                 return "redirect:/result";
             }
         } catch (Exception e) {
