@@ -10,16 +10,16 @@
     </head>
     <body class="p-3 mb-2 bg-light text-black">
         <div class="container justify-content-center w-25 p-3" style="background-color: #eeeeee; margin-top: 5em;">
+            <div th:if="${signupSuccess}" class="alert alert-success">
+                You are successfully signed up! Proceed to Login to the CloudStorage! Happy Storing!
+            </div>
             <h1 class="display-5">Login</h1>
-            <form action="#" th:action="@{/login}" method="POST">
+            <form action="#" th:action="@{/login}"  method="POST">
                 <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
                     Invalid username or password
                 </div>
-                <div id="logout-msg" th:if="${param.logout}" class="alert alert-dark">
+                <div id="logout-msg" th:if="${param.logout}" class="alert alert-success">
                     You have been logged out
-                </div>
-                <div id="success-msg"  th:if="${signupSuccess} == true" class="alert alert-success fill-parent">
-                    You successfully signed up! Continue to login
                 </div>
                 <div class="form-group">
                     <label for="inputUsername">Username</label>

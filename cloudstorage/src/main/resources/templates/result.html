@@ -16,13 +16,8 @@
             </div>
             <div th:if="${errorMessage}" class="alert alert-danger fill-parent">
                 <h1 class="display-5">Error</h1>
-                <span>Your changes were not saved. Click <a th:href="@{/home}" id="return-home2" >here</a> to continue.</span>
+                <span>Your changes were not saved. Either you have not selected a file to upload or you have selected file that is already uploaded. Please aheck your file and try again. Click <a th:href="@{/home}" id="return-home2" >here</a> to continue to home page.</span>
             </div>
-           <!-- <div class="alert alert-danger fill-parent">
-                <h1 class="display-5">Error</h1>
-                <span>Example Error Message</span>
-                <span>Click <a>here</a> to continue.</span>
-            </div> -->
         </div>
     </body>
 </html>

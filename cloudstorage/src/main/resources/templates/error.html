@@ -18,11 +18,11 @@
 <head>
     <title>Error page</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/main.css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
-<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
-<h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>
-<p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+<body  th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+<h1 class="alert alert-danger" th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|" >404</h1>
+<p class="alert alert-danger" th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
 <a href="home.html" th:href="@{/home}">Back to Home Page</a>
 </body>
 </html>
